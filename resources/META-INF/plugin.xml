@@ -1,0 +1,51 @@
+<idea-plugin>
+  <id>com.badoo.example.plugin.badoo-printf</id>
+  <name>Badoo printf example</name>
+  <version>0.0.1</version>
+  <vendor email="mikhail.galanin@magiclab.co" url="https://badoo.com">Magic Lab</vendor>
+
+  <description><![CDATA[
+      A plugin. Actuall, an example.<br>
+      <a href="https://badoo.com">A link</a>.
+    ]]></description>
+
+  <change-notes><![CDATA[
+
+      <p>v0.0.1 [09.02.2020]<br>
+        <ul>
+         <li> Hello world
+         <li> Some random text to make it longer than 40 characters
+       </ul>
+      </p>
+
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="184.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+  <depends>com.intellij.modules.lang</depends>
+  <depends>com.jetbrains.php</depends>
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+    <!-- Logger -->
+    <localInspection language="PHP"
+                     bundle="messages.BadooBundle"
+                     key="inspection.badoo.logger_format.display.name"
+                     groupKey="group.names.badoo"
+                     shortName="LoggerFormatInspection"
+                     enabledByDefault="true" level="ERROR"
+                     implementationClass="com.badoo.example.plugin.logger.LoggerFormatInspection"/>
+
+    <!-- / Logger -->
+
+  </extensions>
+
+</idea-plugin>

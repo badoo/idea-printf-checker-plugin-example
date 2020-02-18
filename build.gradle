@@ -1,0 +1,83 @@
+import groovy.xml.MarkupBuilder
+import groovy.xml.XmlUtil
+import groovy.xml.*
+import java.util.regex.Matcher
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
+        maven { url "https://jetbrains.bintray.com/intellij-third-party-dependencies" }
+        maven { url "https://mvnrepository.com/artifact/org.apache.commons/commons-lang3" }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+    }
+}
+
+plugins {
+    id "org.jetbrains.intellij" version "0.4.15"
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'idea'
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+intellij {
+    version ideaVersion
+    updateSinceUntilBuild false
+    plugins = [
+            'java',
+            "com.jetbrains.php:${phpPluginVersion}",
+            'CSS',
+            'java-i18n',
+            'properties'
+    ]
+    pluginName 'Badoo printf example'
+}
+
+dependencies {
+//    compile 'org.apache.sshd:sshd-mina:2.3.0'
+//    implementation 'commons-lang:commons-lang:2.6'
+}
+
+sourceSets {
+    main.java.srcDirs = ['src']
+    main.kotlin.srcDirs = ['src']
+    main.resources.srcDirs = ['resources']
+    test.kotlin.srcDirs = ['src/test/kotlin']
+}
+
+/*
+ PhpStorm up to v2019.2 is built and distributed with Java v11 and its
+ Java Runtime only recognizes class file versions up to 52.0
+ Without following lines we'll get an incompatible files (that ones which written in Java)
+ this is specifically for Java-files compilation
+ */
+targetCompatibility = javaRuntimeVersion
+sourceCompatibility = javaRuntimeVersion
+/*
+  error: Super calls to Java default methods are prohibited in JVM target 1.6. Recompile with '-jvm-target 1.8'
+  this is specifically for Kotlin-files compilation
+ */
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "${javaVersion}"
+    }
+}
+
+test {
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
+wrapper {
+    gradleVersion '5.5.1'
+}
+

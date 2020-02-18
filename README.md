@@ -1,5 +1,5 @@
-Badoo Component plugin
-=======================
+Badoo Example plugin (printf-like functions)
+============================================
 
 IDE Setup 
 ---------

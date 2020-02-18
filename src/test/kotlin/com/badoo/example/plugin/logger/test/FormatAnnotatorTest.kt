@@ -2,10 +2,9 @@ package com.badoo.example.plugin.logger.test
 
 import com.badoo.example.plugin.logger.LoggerFormatInspection
 import com.badoo.example.plugin.test.BadooComponentTest
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase
 
-class FormatAnnotatorTest : LightCodeInsightFixtureTestCase(), BadooComponentTest {
+class FormatAnnotatorTest : LightJavaCodeInsightFixtureTestCase(), BadooComponentTest {
     override fun getTestDataPath() =
             "src/test/kotlin/com/badoo/example/plugin/logger/test/testData/"
 
